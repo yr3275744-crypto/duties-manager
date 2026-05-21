@@ -7,7 +7,7 @@ def find_soldier_by_id(soldiers:list, soldier_id: int) -> dict | None:
     Returns it if it exists, otherwise None"""
 
     for soldier in soldiers:
-        if soldier == soldier_id:
+        if soldier["id"] == soldier_id:
             return soldier
 
         return None
