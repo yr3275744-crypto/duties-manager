@@ -30,13 +30,16 @@ def add_duty_to_soldier(soldiers:list, soldier_id: int, duty_name: str, day: str
     if not the_soldier:
         raise KeyError("The soldier's id does not exist.")
     
-    if utils.soldier_has_duty(soldiers[soldier_id], duty_name):
+    if utils.soldier_has_duty(the_soldier, duty_name):
         raise ValueError("The duty already exists.")
     
     if not utils.is_valid_day(day):
         raise ValueError("You must enter a duty day.")
     
-    the_soldier["duty"].append({"name":duty_name, "day":day})
+    if the_soldier.get("duties"):
+        the_soldier["duties"].append({"name":duty_name, "day":day})
+    else:
+        the_soldier["duties"] = [{"name":duty_name, "day":day}]
 
     return None
 

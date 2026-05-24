@@ -84,6 +84,7 @@ def handle_remove_soldier(soldiers:list) -> None:
         soldier_id = int(input("Enter the soldier id: "))
     except TypeError:
         raise TypeError("you must enter a number.")
+    
     soldier_manager.remove_soldier(soldiers, soldier_id)
 
 
@@ -100,7 +101,8 @@ def handle_view_soldiers(soldiers:list) -> None:
     """
     soldiers = soldier_manager.get_all_soldiers(soldiers)
     
-    for soldier in soldiers:
+    for i, soldier in enumerate(soldiers):
+        print(f"soldier {i + 1}:")
         for key,value in soldier.items():
             if key != "duties":
                 print(f"the soldier's {key} is {value}")
@@ -201,6 +203,7 @@ def main(soldiers:list) -> None:
         if user_choice != 7:
             try:
                 functions_for_choice[user_choice](soldiers)
+                print("=== done ===")
             
             except (ValueError, KeyError) as e:
                 print(e)

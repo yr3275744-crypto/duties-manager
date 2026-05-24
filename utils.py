@@ -1,5 +1,5 @@
-STATUSES = ""
-DUTIES_DAYS = ""
+STATUSES = ["pending", "completed", "missed"]
+DUTIES_DAYS = ["sunday", "monday", "tuesday", "wednesday", "thursday"]
 
 
 def find_soldier_by_id(soldiers:list, soldier_id: int) -> dict | None:
@@ -38,7 +38,6 @@ def find_duty_by_name(duties: list, duty_name: str) -> dict | None:
             return duty
         
     return None
-    pass
 
 
 def is_valid_status(status: str) -> bool:

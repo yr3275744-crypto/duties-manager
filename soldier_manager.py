@@ -25,7 +25,7 @@ def add_soldier(soldiers:list, soldier_id: int, name: str) -> None:
         raise ValueError("You must enter a full name, not empty string")
     
     if utils.find_soldier_by_id(soldiers, soldier_id):
-        raise ValueError("The soldier's name already exists.")
+        raise ValueError("The soldier's id already exists.")
     
     soldiers.append({"id":soldier_id, "name":name, "duties":[]})
     
@@ -50,7 +50,7 @@ def remove_soldier(soldiers:list, soldier_id: int) -> None:
     מבצעת בדיקת קיום ומסירה מהנתונים.
     זורקת exception במקרה שהחייל לא קיים.
     """
-    the_soldier = utils.find_soldier_by_id(soldier_id)
+    the_soldier = utils.find_soldier_by_id(soldiers, soldier_id)
     
     if not the_soldier:
         raise KeyError("The soldier's id does not exist.")
