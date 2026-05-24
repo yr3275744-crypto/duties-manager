@@ -62,7 +62,7 @@ def handle_add_soldier(soldiers:list) -> None:
 
 
 
-def handle_remove_soldier() -> None:
+def handle_remove_soldier(soldiers:list) -> None:
     """
     מטפלת בתהליך הסרת חייל.
     מקבלת קלט מהמשתמש וקוראת לפונקציות המתאימות.
@@ -73,8 +73,11 @@ def handle_remove_soldier() -> None:
     למה הפונקציה קיימת:
     הפרדה בין UI לבין לוגיקה עסקית.
     """
-    pass
-
+    try:
+        soldier_id = int(input("Enter the soldier id: "))
+    except TypeError:
+        raise TypeError
+    soldier_manager.remove_soldier(soldiers, soldier_id)
 
 def handle_view_soldiers(soldiers:list) -> None:
     """
@@ -97,7 +100,7 @@ def handle_view_soldiers(soldiers:list) -> None:
     return None
 
 
-def handle_add_duty() -> None:
+def handle_add_duty(soldiers:list) -> None:
     """
     מטפלת בתהליך הוספת תורנות לחייל.
     מקבלת קלט מהמשתמש וקוראת לפונקציות המתאימות.
@@ -105,7 +108,17 @@ def handle_add_duty() -> None:
     מקבלת: כלום
     מחזירה: כלום
     """
-    pass
+    try:
+        soldier_id = int(input("Enter the soldier id: "))
+    except TypeError:
+        raise TypeError
+    
+    duty_name = input("Enter the duty name: ")
+    day = input("Enter the duty day: ")
+    duty_manager.add_duty_to_soldier(soldiers, soldier_id, duty_name, day)
+    
+    return None
+        
 
 
 def handle_update_duty_status() -> None:
