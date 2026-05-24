@@ -167,7 +167,7 @@ def handle_view_soldier_duties(soldiers:list) -> None:
     except TypeError:
         raise TypeError("you must enter a number.")
     
-    duty_manager.get_soldier_duties(soldiers, soldier_id)
+    print(duty_manager.get_soldier_duties(soldiers, soldier_id))
 
     return None
 

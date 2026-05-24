@@ -37,7 +37,7 @@ def add_duty_to_soldier(soldiers:list, soldier_id: int, duty_name: str, day: str
         raise ValueError("You must enter a duty day.")
     
     if the_soldier.get("duties"):
-        the_soldier["duties"].append({"name":duty_name, "day":day})
+        the_soldier["duties"].update({"name":duty_name, "day":day})
     else:
         the_soldier["duties"] = [{"name":duty_name, "day":day}]
 
