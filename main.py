@@ -2,12 +2,12 @@ import soldier_manager
 import duty_manager
 
 
-FUNCTIONS_FOR_CHOISE = {1:handle_add_soldier,
-                        2:handle_remove_soldier,
-                        3:handle_view_soldiers,
-                        4:handle_add_duty,
-                        5:handle_update_duty_status,
-                        6:handle_view_soldier_duties}
+# FUNCTIONS_FOR_CHOISE = {1:handle_add_soldier,
+#                         2:handle_remove_soldier,
+#                         3:handle_view_soldiers,
+#                         4:handle_add_duty,
+#                         5:handle_update_duty_status,
+#                         6:handle_view_soldier_duties}
 
 
 def show_menu() -> None:
@@ -39,7 +39,7 @@ def get_user_choice() -> int:
         raise ValueError
 
     try:
-        if 0 < int(the_user_choice) < 7:
+        if 0 < int(the_user_choice) <= 7:
            return int(the_user_choice)
         else:
             raise ValueError("You must enter a number between 0 - 7")
@@ -181,6 +181,15 @@ def main(soldiers:list) -> None:
     למה הפונקציה קיימת:
     נקודת הכניסה לתוכנית. מנהלת את הזרימה הראשית.
     """
+    
+    functions_for_choice = {1:handle_add_soldier,
+                            2:handle_remove_soldier,
+                            3:handle_view_soldiers,
+                            4:handle_add_duty,
+                            5:handle_update_duty_status,
+                            6:handle_view_soldier_duties}
+    
+    user_choice = None
     while user_choice != 7:
         show_menu()
         try:
@@ -190,6 +199,12 @@ def main(soldiers:list) -> None:
             continue
         
         if user_choice != 7:
-            FUNCTIONS_FOR_CHOISE[user_choice](soldiers)
+            try:
+                functions_for_choice[user_choice](soldiers)
+            
+            except (ValueError, KeyError) as e:
+                print(e)
     
     return None
+
+main([])

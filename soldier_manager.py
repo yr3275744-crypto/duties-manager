@@ -24,10 +24,10 @@ def add_soldier(soldiers:list, soldier_id: int, name: str) -> None:
     if not utils.is_valid_name(name):
         raise ValueError("You must enter a full name, not empty string")
     
-    if utils.find_soldier_by_id(soldier_id):
+    if utils.find_soldier_by_id(soldiers, soldier_id):
         raise ValueError("The soldier's name already exists.")
     
-    soldiers.append({"id":soldier_id, "name":name, "dutiels":[]})
+    soldiers.append({"id":soldier_id, "name":name, "duties":[]})
     
     return None
 
