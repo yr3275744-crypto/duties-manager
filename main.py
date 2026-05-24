@@ -1,6 +1,13 @@
 import soldier_manager
 import duty_manager
-import utils
+
+
+FUNCTIONS_FOR_CHOISE = {1:handle_add_soldier,
+                        2:handle_remove_soldier,
+                        3:handle_view_soldiers,
+                        4:handle_add_duty,
+                        5:handle_update_duty_status,
+                        6:handle_view_soldier_duties}
 
 
 def show_menu() -> None:
@@ -8,11 +15,11 @@ def show_menu() -> None:
     print("""Select the action you want to perform:
           1. Adding a soldier to the list of soldiers.
           2. Removing a soldier from the list of soldiers.
-          3.Printing the list of soldiers
-          4.Adding a soldier to duty
-          5.Duty status update
-          6.Printing all of a soldier's duties
-          7.exit.
+          3. Printing the list of soldiers
+          4. Adding a soldier to duty
+          5. Duty status update
+          6. Printing all of a soldier's duties
+          7. exit.
           """)
 
 
@@ -163,7 +170,7 @@ def handle_view_soldier_duties(soldiers:list) -> None:
     return None
 
 
-def main() -> None:
+def main(soldiers:list) -> None:
     """
     הפונקציה הראשית של התוכנית.
     מריצה לולאה ראשית שמציגה תפריט, מקבלת בחירה ומפעילה פעולה.
@@ -180,3 +187,9 @@ def main() -> None:
             user_choice = get_user_choice()
         except ValueError as e:
             print(e)
+            continue
+        
+        if user_choice != 7:
+            FUNCTIONS_FOR_CHOISE[user_choice](soldiers)
+    
+    return None
