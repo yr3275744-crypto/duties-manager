@@ -20,7 +20,7 @@ def get_user_choice() -> int:
     returns it if it is valid and within the desired range, 
     otherwise raises an exception"""
     
-    the_user_choice = input("Enter yor choice:")
+    the_user_choice = input("Enter your choice:")
     if not the_user_choice:
         raise ValueError
 
@@ -38,11 +38,12 @@ def handle_add_soldier(soldiers:list) -> None:
     Receives input from the user, checks and calls the appropriate functions. 
     If the input is invalid - raises exception"""
 
-    soldier_name = input("Enter the soldier name: ")
     try:
         soldier_id = int(input("Enter the soldier id: "))
-    except TypeError:
-        raise TypeError("you must enter a number.")
+    except ValueError:
+        raise ValueError("you must enter a number.")
+    
+    soldier_name = input("Enter the soldier name: ").lower()
     
     soldier_manager.add_soldier(soldiers, soldier_id, soldier_name)
 
@@ -53,8 +54,8 @@ def handle_remove_soldier(soldiers:list) -> None:
     If the input is invalid - raises exception"""
     try:
         soldier_id = int(input("Enter the soldier id: "))
-    except TypeError:
-        raise TypeError("you must enter a number.")
+    except ValueError:
+        raise ValueError("you must enter a number.")
     
     soldier_manager.remove_soldier(soldiers, soldier_id)
 
@@ -79,11 +80,11 @@ def handle_add_duty(soldiers:list) -> None:
     If the input is invalid - raises exception"""
     try:
         soldier_id = int(input("Enter the soldier id: "))
-    except TypeError:
-        raise TypeError("you must enter a number.")
+    except ValueError:
+        raise ValueError("you must enter a number.")
     
-    duty_name = input("Enter the duty name: ")
-    day = input("Enter the duty day: ")
+    duty_name = input("Enter the duty name: ").lower()
+    day = input("Enter the duty day: ").lower()
     duty_manager.add_duty_to_soldier(soldiers, soldier_id, duty_name, day)
     
     return None
@@ -95,11 +96,11 @@ def handle_update_duty_status(soldiers:list) -> None:
     If the input is invalid - raises exception"""
     try:
         soldier_id = int(input("Enter the soldier id: "))
-    except TypeError:
-        raise TypeError("you must enter a number.")
+    except ValueError:
+        raise ValueError("you must enter a number.")
     
-    duty_name = input("Enter the duty name: ")
-    new_status = input("Enter the new status: ")
+    duty_name = input("Enter the duty name: ").lower()
+    new_status = input("Enter the new status: ").lower()
     
     duty_manager.update_duty_status(soldiers, soldier_id, duty_name, new_status)
 
@@ -112,8 +113,8 @@ def handle_view_soldier_duties(soldiers:list) -> None:
     If the input is invalid - raises exception"""
     try:
         soldier_id = int(input("Enter the soldier id: "))
-    except TypeError:
-        raise TypeError("you must enter a number.")
+    except ValueError:
+        raise ValueError("you must enter a number.")
     
     print(duty_manager.get_soldier_duties(soldiers, soldier_id))
 
@@ -148,6 +149,7 @@ def main(soldiers:list) -> None:
             
             except (ValueError, KeyError) as e:
                 print(e)
+                continue
     
     return None
 
