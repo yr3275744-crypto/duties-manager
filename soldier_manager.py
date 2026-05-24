@@ -1,26 +1,11 @@
 import utils
 
 def add_soldier(soldiers:list, soldier_id: int, name: str) -> None:
-    """
-    מוסיפה חייל חדש למערכת.
+    """Adds a new soldier to the list.
+    Gets the list of soldiers, the soldier's id and name,
+    adds it or raises exceptions 
+    if it exists in the system or the name is invalid."""
     
-    מקבלת:
-        soldier_id (int): מספר אישי של החייל
-        name (str): שם החייל
-    
-    מחזירה:
-        None - הפונקציה מוסיפה את החייל או זורקת exception
-    
-    זורקת:
-        ValueError: אם id כבר קיים במערכת
-        ValueError: אם name ריק או לא תקין
-    
-    למה הפונקציה קיימת:
-    לוגיקה עסקית טהורה של הוספת חייל.
-    מבצעת בדיקות תקינות ומוסיפה את החייל לנתונים.
-    לא מטפלת בקלט/פלט - רק בלוגיקה.
-    זורקת exceptions במקרה של שגיאה במקום להחזיר False.
-    """
     if not utils.is_valid_name(name):
         raise ValueError("You must enter a full name, not empty string")
     
@@ -33,23 +18,9 @@ def add_soldier(soldiers:list, soldier_id: int, name: str) -> None:
 
 
 def remove_soldier(soldiers:list, soldier_id: int) -> None:
-    """
-    מסירה חייל מהמערכת לפי id.
-
-    מקבלת:
-        soldier_id (int): מספר אישי של החייל
+    """Removes a soldier from the list by id. 
+    If the soldier does not exist - raises exception"""
     
-    מחזירה:
-        None - הפונקציה מסירה את החייל או זורקת exception
-    
-    זורקת:
-        KeyError: אם חייל עם id זה לא נמצא במערכת
-    
-    למה הפונקציה קיימת:
-    לוגיקה עסקית של הסרת חייל.
-    מבצעת בדיקת קיום ומסירה מהנתונים.
-    זורקת exception במקרה שהחייל לא קיים.
-    """
     the_soldier = utils.find_soldier_by_id(soldiers, soldier_id)
     
     if not the_soldier:
@@ -60,21 +31,6 @@ def remove_soldier(soldiers:list, soldier_id: int) -> None:
 
 
 def get_all_soldiers(soldiers:list) -> list:
-    """
-    מחזירה את רשימת כל החיילים במערכת.
+    """Receives the list of soldiers and returns it."""
     
-    סוג: גישה לנתונים (Data Access)
-    
-    מקבלת: כלום
-    
-    מחזירה:
-        list: רשימה של מילונים, כל מילון מייצג חייל
-              רשימה ריקה אם אין חיילים
-    
-    זורקת: כלום - תמיד מחזירה רשימה (ריקה או מלאה)
-    
-    למה הפונקציה קיימת:
-    גישה לנתונים בצורה מבוקרת.
-    מאפשר לקבל את הנתונים מבלי לגשת ישירות למשתנה הגלובלי.
-    """
     return soldiers
