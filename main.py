@@ -2,14 +2,6 @@ import soldier_manager
 import duty_manager
 
 
-# FUNCTIONS_FOR_CHOISE = {1:handle_add_soldier,
-#                         2:handle_remove_soldier,
-#                         3:handle_view_soldiers,
-#                         4:handle_add_duty,
-#                         5:handle_update_duty_status,
-#                         6:handle_view_soldier_duties}
-
-
 def show_menu() -> None:
     """print the menu."""
     print("""Select the action you want to perform:
@@ -24,16 +16,10 @@ def show_menu() -> None:
 
 
 def get_user_choice() -> int:
-    """
-    מקבלת בחירה מהמשתמש.
+    """Accepts a selection from the user, 
+    returns it if it is valid and within the desired range, 
+    otherwise raises an exception"""
     
-    מקבלת: כלום
-    מחזירה: מחרוזת המייצגת את בחירת המשתמש
-    
-    למה הפונקציה קיימת:
-    הפרדת קבלת קלט מהמשתמש מהלוגיקה של עיבוד הבחירה.
-    מאפשר להחליף את שיטת הקלט בעתיד (למשל, GUI).
-    """
     the_user_choice = input("Enter yor choice:")
     if not the_user_choice:
         raise ValueError
@@ -48,18 +34,10 @@ def get_user_choice() -> int:
 
 
 def handle_add_soldier(soldiers:list) -> None:
-    """
-    מטפלת בתהליך הוספת חייל חדש.
-    מקבלת קלט מהמשתמש וקוראת לפונקציות המתאימות.
-    
-    מקבלת: כלום
-    מחזירה: כלום
-    
-    למה הפונקציה קיימת:
-    מפרידה בין הקלט/פלט לבין הלוגיקה העסקית.
-    main.py אחראי על אינטראקציה עם המשתמש,
-    soldier_manager.py אחראי על הלוגיקה.
-    """
+    """Handles the process of adding a new soldier.
+    Receives input from the user, checks and calls the appropriate functions. 
+    If the input is invalid - raises exception"""
+
     soldier_name = input("Enter the soldier name: ")
     try:
         soldier_id = int(input("Enter the soldier id: "))
@@ -70,16 +48,9 @@ def handle_add_soldier(soldiers:list) -> None:
 
 
 def handle_remove_soldier(soldiers:list) -> None:
-    """
-    מטפלת בתהליך הסרת חייל.
-    מקבלת קלט מהמשתמש וקוראת לפונקציות המתאימות.
-    
-    מקבלת: כלום
-    מחזירה: כלום
-    
-    למה הפונקציה קיימת:
-    הפרדה בין UI לבין לוגיקה עסקית.
-    """
+    """Handles the process of removing a soldier.
+    Receives input from the user, checks and calls the appropriate functions. 
+    If the input is invalid - raises exception"""
     try:
         soldier_id = int(input("Enter the soldier id: "))
     except TypeError:
@@ -89,16 +60,8 @@ def handle_remove_soldier(soldiers:list) -> None:
 
 
 def handle_view_soldiers(soldiers:list) -> None:
-    """
-    מטפלת בתהליך הצגת כל החיילים.
-    קוראת לפונקציה המתאימה ומציגה את התוצאה.
-    
-    מקבלת: כלום
-    מחזירה: כלום
-    
-    למה הפונקציה קיימת:
-    הפרדה בין קבלת הנתונים לבין הצגתם.
-    """
+    """Handles the process of displaying the list of soldiers. 
+    Receives nothing and returns None."""
     soldiers = soldier_manager.get_all_soldiers(soldiers)
     
     for i, soldier in enumerate(soldiers):
@@ -111,13 +74,9 @@ def handle_view_soldiers(soldiers:list) -> None:
 
 
 def handle_add_duty(soldiers:list) -> None:
-    """
-    מטפלת בתהליך הוספת תורנות לחייל.
-    מקבלת קלט מהמשתמש וקוראת לפונקציות המתאימות.
-    
-    מקבלת: כלום
-    מחזירה: כלום
-    """
+    """Handles the process of add duty to a soldier.
+    Receives input from the user, checks and calls the appropriate functions. 
+    If the input is invalid - raises exception"""
     try:
         soldier_id = int(input("Enter the soldier id: "))
     except TypeError:
@@ -131,13 +90,9 @@ def handle_add_duty(soldiers:list) -> None:
         
 
 def handle_update_duty_status(soldiers:list) -> None:
-    """
-    מטפלת בתהליך עדכון סטטוס תורנות.
-    מקבלת קלט מהמשתמש וקוראת לפונקציות המתאימות.
-    
-    מקבלת: כלום
-    מחזירה: כלום
-    """
+    """Handles the process of update duty status.
+    Receives input from the user, checks and calls the appropriate functions. 
+    If the input is invalid - raises exception"""
     try:
         soldier_id = int(input("Enter the soldier id: "))
     except TypeError:
@@ -152,16 +107,9 @@ def handle_update_duty_status(soldiers:list) -> None:
 
 
 def handle_view_soldier_duties(soldiers:list) -> None:
-    """
-    מטפלת בתהליך הצגת תורנויות של חייל.
-    מקבלת קלט מהמשתמש וקוראת לפונקציות המתאימות.
-    
-    מקבלת: כלום
-    מחזירה: כלום
-    
-    למה הפונקציה קיימת:
-    הפרדה בין UI לבין לוגיקה עסקית.
-    """
+    """Handles the process of view a soldier duties.
+    Receives input from the user, checks and calls the appropriate functions. 
+    If the input is invalid - raises exception"""
     try:
         soldier_id = int(input("Enter the soldier id: "))
     except TypeError:
@@ -173,16 +121,9 @@ def handle_view_soldier_duties(soldiers:list) -> None:
 
 
 def main(soldiers:list) -> None:
-    """
-    הפונקציה הראשית של התוכנית.
-    מריצה לולאה ראשית שמציגה תפריט, מקבלת בחירה ומפעילה פעולה.
-    
-    מקבלת: כלום
-    מחזירה: כלום
-    
-    למה הפונקציה קיימת:
-    נקודת הכניסה לתוכנית. מנהלת את הזרימה הראשית.
-    """
+    """The main function of the program.
+    Runs a main loop that displays a menu, accepts a selection, 
+    and triggers an action."""
     
     functions_for_choice = {1:handle_add_soldier,
                             2:handle_remove_soldier,
