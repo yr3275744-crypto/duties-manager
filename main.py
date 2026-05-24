@@ -35,9 +35,10 @@ def get_user_choice() -> int:
         if 0 < int(the_user_choice) < 7:
            return int(the_user_choice)
         else:
-            raise ValueError
+            raise ValueError("You must enter a number between 0 - 7")
     except ValueError:
-        raise ValueError
+        raise ValueError("You must enter a number between 0 - 7")
+
 
 def handle_add_soldier(soldiers:list) -> None:
     """
@@ -56,10 +57,9 @@ def handle_add_soldier(soldiers:list) -> None:
     try:
         soldier_id = int(input("Enter the soldier id: "))
     except TypeError:
-        raise TypeError
+        raise TypeError("you must enter a number.")
     
     soldier_manager.add_soldier(soldiers, soldier_id, soldier_name)
-
 
 
 def handle_remove_soldier(soldiers:list) -> None:
@@ -76,8 +76,9 @@ def handle_remove_soldier(soldiers:list) -> None:
     try:
         soldier_id = int(input("Enter the soldier id: "))
     except TypeError:
-        raise TypeError
+        raise TypeError("you must enter a number.")
     soldier_manager.remove_soldier(soldiers, soldier_id)
+
 
 def handle_view_soldiers(soldiers:list) -> None:
     """
@@ -111,7 +112,7 @@ def handle_add_duty(soldiers:list) -> None:
     try:
         soldier_id = int(input("Enter the soldier id: "))
     except TypeError:
-        raise TypeError
+        raise TypeError("you must enter a number.")
     
     duty_name = input("Enter the duty name: ")
     day = input("Enter the duty day: ")
@@ -120,8 +121,7 @@ def handle_add_duty(soldiers:list) -> None:
     return None
         
 
-
-def handle_update_duty_status() -> None:
+def handle_update_duty_status(soldiers:list) -> None:
     """
     מטפלת בתהליך עדכון סטטוס תורנות.
     מקבלת קלט מהמשתמש וקוראת לפונקציות המתאימות.
@@ -129,10 +129,20 @@ def handle_update_duty_status() -> None:
     מקבלת: כלום
     מחזירה: כלום
     """
-    pass
+    try:
+        soldier_id = int(input("Enter the soldier id: "))
+    except TypeError:
+        raise TypeError("you must enter a number.")
+    
+    duty_name = input("Enter the duty name: ")
+    new_status = input("Enter the new status: ")
+    
+    duty_manager.update_duty_status(soldiers, soldier_id, duty_name, new_status)
+
+    return None
 
 
-def handle_view_soldier_duties() -> None:
+def handle_view_soldier_duties(soldiers:list) -> None:
     """
     מטפלת בתהליך הצגת תורנויות של חייל.
     מקבלת קלט מהמשתמש וקוראת לפונקציות המתאימות.
@@ -143,7 +153,14 @@ def handle_view_soldier_duties() -> None:
     למה הפונקציה קיימת:
     הפרדה בין UI לבין לוגיקה עסקית.
     """
-    pass
+    try:
+        soldier_id = int(input("Enter the soldier id: "))
+    except TypeError:
+        raise TypeError("you must enter a number.")
+    
+    duty_manager.get_soldier_duties(soldiers, soldier_id)
+
+    return None
 
 
 def main() -> None:
@@ -157,4 +174,9 @@ def main() -> None:
     למה הפונקציה קיימת:
     נקודת הכניסה לתוכנית. מנהלת את הזרימה הראשית.
     """
-    pass
+    while user_choice != 7:
+        show_menu()
+        try:
+            user_choice = get_user_choice()
+        except ValueError as e:
+            print(e)

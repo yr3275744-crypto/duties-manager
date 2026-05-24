@@ -21,13 +21,14 @@ def add_soldier(soldiers:list, soldier_id: int, name: str) -> None:
     לא מטפלת בקלט/פלט - רק בלוגיקה.
     זורקת exceptions במקרה של שגיאה במקום להחזיר False.
     """
-    if not utils.is_valid_name(name) or type(name) != str:
-        raise ValueError
+    if not utils.is_valid_name(name):
+        raise ValueError("You must enter a full name, not empty string")
     
-    if utils.find_soldier_by_id(soldier_id) or type(soldier_id) != int:
-        raise ValueError
+    if utils.find_soldier_by_id(soldier_id):
+        raise ValueError("The soldier's name already exists.")
     
     soldiers.append({"id":soldier_id, "name":name, "dutiels":[]})
+    
     return None
 
 
@@ -52,7 +53,7 @@ def remove_soldier(soldiers:list, soldier_id: int) -> None:
     the_soldier = utils.find_soldier_by_id(soldier_id)
     
     if not the_soldier:
-        raise KeyError
+        raise KeyError("The soldier's id does not exist.")
     
     soldiers.remove(the_soldier)
     

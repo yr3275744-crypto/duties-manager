@@ -25,16 +25,16 @@ def add_duty_to_soldier(soldiers:list, soldier_id: int, duty_name: str, day: str
     the_soldier = utils.find_soldier_by_id(soldiers, soldier_id)
     
     if not utils.is_valid_name(duty_name):
-        raise ValueError
+        raise ValueError("You must enter a full name, not empty string")
 
     if not the_soldier:
-        raise KeyError
+        raise KeyError("The soldier's id does not exist.")
     
     if utils.soldier_has_duty(soldiers[soldier_id], duty_name):
-        raise ValueError
+        raise ValueError("The duty already exists.")
     
     if not utils.is_valid_day(day):
-        raise ValueError
+        raise ValueError("You must enter a duty day.")
     
     the_soldier["duty"].append({"name":duty_name, "day":day})
 
@@ -65,13 +65,13 @@ def update_duty_status(soldiers:list, soldier_id: int, duty_name: str, new_statu
     the_soldier = utils.find_soldier_by_id(soldiers, soldier_id)
 
     if not the_soldier:
-        raise KeyError
+        raise KeyError("The soldier's id does not exist.")
     
     if not utils.find_duty_by_name(the_soldier["duties"], duty_name):
-        raise KeyError
+        raise KeyError("The duty does not exists")
     
     if not utils.is_valid_status(new_status):
-        raise ValueError
+        raise ValueError("You must enter a valid ststus.")
     
     the_duty = utils.find_duty_by_name(the_soldier["duties"], duty_name)
     the_duty["status"] = new_status
@@ -101,6 +101,6 @@ def get_soldier_duties(soldiers:list, soldier_id: int) -> list:
     the_soldier = utils.find_soldier_by_id(soldiers, soldier_id)
     
     if not the_soldier:
-        raise KeyError
+        raise KeyError("The soldier's id does not exist.")
     
     return the_soldier["duties"]
